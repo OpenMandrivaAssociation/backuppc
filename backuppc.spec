@@ -1,7 +1,7 @@
 %define name    backuppc
 %define Name    BackupPC
 %define version 3.0.0
-%define release %mkrel 1
+%define release %mkrel 2
 
 Name:               %{name}
 Version:            %{version}
@@ -48,13 +48,25 @@ find . -type f -exec perl -pi -e 's|__TOPDIR__|%{_localstatedir}/%{name}|' {} \;
 # set configuration
 # the binaries path are disabled to avoid service failure at start
 perl -pi \
-    -e 's|\$Conf{BackupPCUser} = .*|\$Conf{BackupPCUser} = "%{name}";|;' \
-    -e 's|\$Conf{CgiDir} = .*|\$Conf{CgiDir} = "%{_var}/www/%{name}";|;' \
-    -e 's|\$Conf{InstallDir} = .*|\$Conf{InstallDir} = "%{_datadir}/%{name}";|;' \
-    -e 's|\$Conf{CgiImageDirURL} = .*|\$Conf{CgiImageDirURL} = "/%{name}";|;' \
-    -e 's|\$Conf{SshPath} = .*|\$Conf{SshPath} = "";|;' \
-    -e 's|\$Conf{SmbClientPath} = .*|\$Conf{SmbClientPath} = "";|;' \
-    -e 's|\$Conf{NmbLookupPath} = .*|\$Conf{NmbLookupPath} = "";|;' \
+    -e 's|^\$Conf{BackupPCUser}.*|\$Conf{BackupPCUser} = "%{name}";|;' \
+    -e 's|^\$Conf{CgiDir}.*|\$Conf{CgiDir} = "%{_var}/www/%{name}";|;' \
+    -e 's|^\$Conf{InstallDir}.*|\$Conf{InstallDir} = "%{_datadir}/%{name}";|;' \
+    -e 's|^\$Conf{CgiImageDirURL}.*|\$Conf{CgiImageDirURL} = "/%{name}";|;' \
+    -e 's|^\$Conf{SshPath}.*|\$Conf{SshPath} = "";|;' \
+    -e 's|^\$Conf{SmbClientPath}.*|\$Conf{SmbClientPath} = "";|;' \
+    -e 's|^\$Conf{NmbLookupPath}.*|\$Conf{NmbLookupPath} = "";|;' \
+    -e 's|^\$Conf{PingPath}.*|\$Conf{PingPath} = "/bin/ping";|;' \
+    -e 's|^\$Conf{DfPath}.*|\$Conf{DfPath} = "/bin/df";|;' \
+    -e 's|^\$Conf{SplitPath}.*|\$Conf{SplitPath} = "/usr/bin/split";|;' \
+    -e 's|^\$Conf{CatPath}.*|\$Conf{CatPath} = "/bin/cat";|;' \
+    -e 's|^\$Conf{GzipPath}.*|\$Conf{GzipPath} = "/bin/gzip";|;' \
+    -e 's|^\$Conf{Bzip2Path}.*|\$Conf{Bzip2Path} = "/usr/bin/bzip2";|;' \
+    -e 's|^\$Conf{SendmailPath}.*|\$Conf{SendmailPath} = "/usr/sbin/sendmail";|;' \
+    -e 's|^\$Conf{ServerInitdPath}.*|\$Conf{ServerInitdPath} = "%{_initrddir}/%{name}";|;' \
+    -e 's|^\$Conf{BackupPCdPath}.*|\$Conf{BackupPCdPath} = "%{_datadir}/%{name}/bin/BackupPC";|;' \
+    -e 's|^\$Conf{TarClientPath}.*|\$Conf{TarClientPath} = "/bin/tar";|;' \
+    -e 's|^\$Conf{RsyncClientPath}.*|\$Conf{RsyncClientPath} = "/usr/bin/rsync";|;' \
+    -e 's|^\$Conf{SmbClientPath}.*|\$Conf{TarClientPath} = "/usr/bin/smbclient";|;' \
     conf/config.pl
 
 %install
