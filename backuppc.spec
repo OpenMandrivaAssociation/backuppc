@@ -1,7 +1,7 @@
 %define name    backuppc
 %define Name    BackupPC
-%define version 3.0.0
-%define release %mkrel 2
+%define version 3.1.0
+%define release %mkrel 1
 
 Name:               %{name}
 Version:            %{version}
@@ -10,9 +10,9 @@ Summary:            High-performance, enterprise-grade backup system
 Group:              Archiving/Backup
 License:            GPL
 url:                http://backuppc.sourceforge.net
-Source:             http://sourceforge.net/projects/backuppc/%{Name}-%{version}.tar.bz2
+Source:             http://sourceforge.net/projects/backuppc/%{Name}-%{version}.tar.gz
 Source2:            %{name}.init
-Patch0:             %{name}-3.0.0-fhs.patch
+Patch0:             %{name}-3.1.0-fhs.patch
 Requires:           sendmail-command
 Requires:           apache
 Requires(pre):      rpm-helper
