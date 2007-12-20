@@ -26,6 +26,7 @@ Requires(postun):   rpm-helper >= 0.16
 BuildRequires:      rpm-helper >= 0.16
 BuildRequires:      rpm-mandriva-setup >= 1.23
 Buildarch:          noarch
+BuildRoot:          %{_tmppath}/%{name}-%{version}
 
 %description
 BackupPC is a high-performance, enterprise-grade system
