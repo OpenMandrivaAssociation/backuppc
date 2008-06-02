@@ -47,7 +47,7 @@ find . -type f -exec perl -pi -e 's|^#!/bin/perl|#!/usr/bin/perl|' {} \;
 %build
 # set installation directory
 find . -type f -exec perl -pi -e 's|__INSTALLDIR__|%{_datadir}/%{name}|' {} \;
-find . -type f -exec perl -pi -e 's|__TOPDIR__|%{_localstatedir}/%{name}|' {} \;
+find . -type f -exec perl -pi -e 's|__TOPDIR__|%{_localstatedir}/lib/%{name}|' {} \;
 # set configuration
 # the binaries path are disabled to avoid service failure at start
 perl -pi \
@@ -88,8 +88,8 @@ install -m 644 conf/*.css %{buildroot}%{_var}/www/%{name}
 install -m 4755 cgi-bin/BackupPC_Admin %{buildroot}%{_var}/www/%{name}/BackupPC_Admin.cgi
 
 # variable files
-install -d -m 755 %{buildroot}%{_localstatedir}/%{name}
-install -d -m 755 %{buildroot}%{_localstatedir}/%{name}/{cpool,log,pc,pool,trash}
+install -d -m 755 %{buildroot}%{_localstatedir}/lib/%{name}
+install -d -m 755 %{buildroot}%{_localstatedir}/lib/%{name}/{cpool,log,pc,pool,trash}
 
 # configuration
 install -d -m 755 %{buildroot}%{_sysconfdir}/%{name}
@@ -133,7 +133,7 @@ Additional useful packages
 EOF
 
 %pre
-%_pre_useradd %{name} %{_localstatedir}/%{name} /bin/sh
+%_pre_useradd %{name} %{_localstatedir}/lib/%{name} /bin/sh
 
 %post
 %_post_service %{name}
@@ -157,7 +157,7 @@ rm -rf %{buildroot}
 %{_initrddir}/%{name}
 %{_datadir}/%{name}
 %{_var}/www/%{name}
-%attr(-,backuppc,backuppc) %{_localstatedir}/%{name}
+%attr(-,backuppc,backuppc) %{_localstatedir}/lib/%{name}
 %attr(-,backuppc,backuppc) %{_var}/log/%{name}
 %attr(-,backuppc,backuppc) %{_var}/www/%{name}/BackupPC_Admin.cgi
 
