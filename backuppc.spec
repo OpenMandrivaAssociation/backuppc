@@ -1,7 +1,7 @@
 %define name    backuppc
 %define Name    BackupPC
 %define version 3.1.0
-%define release %mkrel 5
+%define release %mkrel 6
 
 %define _provides_exceptions perl(BackupPC::.*)
 %define _requires_exceptions perl(BackupPC::.*)
@@ -23,6 +23,9 @@ Requires(preun):    rpm-helper
 # webapp macros and scriptlets
 Requires(post):     rpm-helper >= 0.16
 Requires(postun):   rpm-helper >= 0.16
+Suggests:           openssh-clients
+Suggests:           samba-client
+Suggests:           perl(File::RsyncP)
 BuildRequires:      rpm-helper >= 0.16
 BuildRequires:      rpm-mandriva-setup >= 1.23
 Buildarch:          noarch
@@ -125,11 +128,6 @@ The setup used here differs from default one, to achieve better FHS compliance.
 - the files non accessibles from the web are in /usr/share/backuppc
 - the variables files in /var/lib/backuppc
 - both global and per-host configuration file are in /etc/backuppc
-
-Additional useful packages
---------------------------
-- openssh-clients for ssh-based backup
-- samba-client for samba-based backup
 EOF
 
 %pre
