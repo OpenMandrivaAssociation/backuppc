@@ -1,7 +1,7 @@
 %define name    backuppc
 %define Name    BackupPC
 %define version 3.1.0
-%define release %mkrel 6
+%define release %mkrel 7
 
 %define _provides_exceptions perl(BackupPC::.*)
 %define _requires_exceptions perl(BackupPC::.*)
@@ -88,6 +88,7 @@ cp -pr doc %{buildroot}%{_datadir}/%{name}
 install -d -m 755 %{buildroot}%{_var}/www/%{name}
 install -m 644 images/* %{buildroot}%{_var}/www/%{name}
 install -m 644 conf/*.css %{buildroot}%{_var}/www/%{name}
+install -m 644 conf/*.js %{buildroot}%{_var}/www/%{name}
 install -m 4755 cgi-bin/BackupPC_Admin %{buildroot}%{_var}/www/%{name}/BackupPC_Admin.cgi
 
 # variable files
