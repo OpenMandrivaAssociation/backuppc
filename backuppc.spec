@@ -1,7 +1,7 @@
 %define name    backuppc
 %define Name    BackupPC
 %define version 3.1.0
-%define release %mkrel 7
+%define release %mkrel 8
 
 %define _provides_exceptions perl(BackupPC::.*)
 %define _requires_exceptions perl(BackupPC::.*)
