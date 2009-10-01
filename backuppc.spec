@@ -1,7 +1,7 @@
 %define name    backuppc
 %define Name    BackupPC
 %define version 3.1.0
-%define release %mkrel 8
+%define release %mkrel 9
 
 %define _provides_exceptions perl(BackupPC::.*)
 %define _requires_exceptions perl(BackupPC::.*)
@@ -16,6 +16,7 @@ url:                http://backuppc.sourceforge.net
 Source:             http://sourceforge.net/projects/backuppc/%{Name}-%{version}.tar.gz
 Source2:            %{name}.init
 Patch0:             %{name}-3.1.0-fhs.patch
+Patch1: BackupPC-3.1.0-CVE-2009-3369.diff
 Requires:           sendmail-command
 Requires:           apache
 Requires(pre):      rpm-helper
@@ -40,6 +41,8 @@ software, and a powerful Apache/CGI user interface.
 %prep
 %setup -q -n %{Name}-%{version}
 %patch0 -p1
+%patch1 -p0
+
 rm -rf images/CVS
 # fix file perms
 find lib -type f -exec chmod 644 {} \;
