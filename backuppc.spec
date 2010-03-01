@@ -1,7 +1,7 @@
 %define name    backuppc
 %define Name    BackupPC
 %define version 3.1.0
-%define release %mkrel 9
+%define release %mkrel 10
 
 %define _provides_exceptions perl(BackupPC::.*)
 %define _requires_exceptions perl(BackupPC::.*)
@@ -21,14 +21,11 @@ Requires:           sendmail-command
 Requires:           apache
 Requires(pre):      rpm-helper
 Requires(preun):    rpm-helper
-# webapp macros and scriptlets
-Requires(post):     rpm-helper >= 0.16
-Requires(postun):   rpm-helper >= 0.16
+Requires(post):   rpm-helper
+Requires(postun):   rpm-helper
 Suggests:           openssh-clients
 Suggests:           samba-client
 Suggests:           perl(File::RsyncP)
-BuildRequires:      rpm-helper >= 0.16
-BuildRequires:      rpm-mandriva-setup >= 1.23
 Buildarch:          noarch
 BuildRoot:          %{_tmppath}/%{name}-%{version}
 
@@ -139,14 +136,18 @@ EOF
 
 %post
 %_post_service %{name}
+%if %mdkversion < 201010
 %_post_webapp
+%endif
 
 %preun
 %_preun_service %{name}
 
 %postun
 %_postun_userdel %{name}
+%if %mdkversion < 201010
 %_postun_webapp
+%endif
 
 %clean
 rm -rf %{buildroot}
