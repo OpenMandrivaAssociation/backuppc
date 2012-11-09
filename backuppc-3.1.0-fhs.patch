@@ -1,0 +1,23 @@
+diff -Naur --exclude '*~' --exclude '*.rej' --exclude '*.orig' BackupPC-3.1.0/lib/BackupPC/Lib.pm BackupPC-3.1.0-fhs/lib/BackupPC/Lib.pm
+--- BackupPC-3.1.0/lib/BackupPC/Lib.pm	2007-11-26 04:00:07.000000000 +0100
++++ BackupPC-3.1.0-fhs/lib/BackupPC/Lib.pm	2008-02-17 22:49:33.000000000 +0100
+@@ -109,7 +109,7 @@
+     # Whether to use filesystem hierarchy standard for file layout.
+     # If set, text config files are below /etc/BackupPC.
+     #
+-    my $useFHS = 0;
++    my $useFHS = 1;
+     my $paths;
+ 
+     #
+@@ -128,8 +128,8 @@
+             useFHS     => $useFHS,
+             TopDir     => $topDir,
+             InstallDir => $installDir,
+-            ConfDir    => $confDir eq "" ? '__CONFDIR__' : $confDir,
+-            LogDir     => '/var/log/BackupPC',
++            ConfDir    => $confDir eq "" ? '/etc/backuppc' : $confDir,
++            LogDir     => '/var/log/backuppc',
+         };
+     } else {
+         $paths = {
