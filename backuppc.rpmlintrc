@@ -1,0 +1,1 @@
+addFilter("E: malformed-line-in-lsb-comment-block.*")

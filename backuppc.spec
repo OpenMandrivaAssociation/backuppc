@@ -1,14 +1,16 @@
-%define name    backuppc
 %define Name    BackupPC
-%define version 3.2.0
-%define release %mkrel 1
 
+%if %{_use_internal_dependency_generator}
+%define __noautoreq 'perl\\(BackupPC::.*\\)'
+%define __noautoprov 'perl\\(BackupPC::.*\\)'
+%else
 %define _provides_exceptions perl(BackupPC::.*)
 %define _requires_exceptions perl(BackupPC::.*)
+%endif
 
-Name:               %{name}
-Version:            %{version}
-Release:            %{release}
+Name:               backuppc
+Version:            3.2.0
+Release:            3
 Summary:            High-performance, enterprise-grade backup system
 Group:              Archiving/Backup
 License:            GPL
@@ -27,7 +29,6 @@ Suggests:           openssh-clients
 Suggests:           samba-client
 Suggests:           perl(File::RsyncP)
 Buildarch:          noarch
-BuildRoot:          %{_tmppath}/%{name}-%{version}
 
 %description
 BackupPC is a high-performance, enterprise-grade system
@@ -76,8 +77,6 @@ perl -pi \
     conf/config.pl
 
 %install
-rm -rf %{buildroot}
-
 # constant files
 install -d -m 755 %{buildroot}%{_datadir}/%{name}
 cp -pr lib %{buildroot}%{_datadir}/%{name}
@@ -136,21 +135,12 @@ EOF
 
 %post
 %_post_service %{name}
-%if %mdkversion < 201010
-%_post_webapp
-%endif
 
 %preun
 %_preun_service %{name}
 
 %postun
 %_postun_userdel %{name}
-%if %mdkversion < 201010
-%_postun_webapp
-%endif
-
-%clean
-rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
@@ -159,9 +149,95 @@ rm -rf %{buildroot}
 %config(noreplace) %{_webappconfdir}/%{name}.conf
 %{_initrddir}/%{name}
 %{_datadir}/%{name}
-%{_var}/www/%{name}
+%{_var}/www/%{name}/*gif
+%{_var}/www/%{name}/*png
+%{_var}/www/%{name}/*js
+%{_var}/www/%{name}/*css
+%{_var}/www/%{name}/*ico
 %attr(-,backuppc,backuppc) %{_localstatedir}/lib/%{name}
 %attr(-,backuppc,backuppc) %{_var}/log/%{name}
 %attr(-,backuppc,backuppc) %{_var}/www/%{name}/BackupPC_Admin.cgi
 
+
+
+
+%changelog
+* Sat Aug 07 2010 Guillaume Rousse <guillomovitch@mandriva.org> 3.2.0-1mdv2011.0
++ Revision: 567315
+- new version
+
+* Mon Mar 01 2010 Guillaume Rousse <guillomovitch@mandriva.org> 3.1.0-10mdv2010.1
++ Revision: 513151
+- rely on filetrigger for reloading apache configuration begining with 2010.1, rpm-helper macros otherwise
+
+* Thu Oct 01 2009 Oden Eriksson <oeriksson@mandriva.com> 3.1.0-9mdv2010.0
++ Revision: 452219
+- P1: security fix for CVE-2009-3369 (debian)
+
+* Thu Sep 10 2009 Thierry Vignaud <tv@mandriva.org> 3.1.0-8mdv2010.0
++ Revision: 436764
+- rebuild
+
+* Thu Jan 29 2009 Guillaume Rousse <guillomovitch@mandriva.org> 3.1.0-7mdv2009.1
++ Revision: 335370
+- ship missing javascript file (close #47365)
+
+* Mon Jan 19 2009 Guillaume Rousse <guillomovitch@mandriva.org> 3.1.0-6mdv2009.1
++ Revision: 331458
+- add a few soft dependencies, as nobody want to read documentation (fix #47045)
+
+* Wed Jul 23 2008 Thierry Vignaud <tv@mandriva.org> 3.1.0-5mdv2009.0
++ Revision: 243159
+- rebuild
+
+  + Pixel <pixel@mandriva.com>
+    - adapt to %%_localstatedir now being /var instead of /var/lib (#22312)
+
+* Sun Feb 17 2008 Guillaume Rousse <guillomovitch@mandriva.org> 3.1.0-3mdv2008.1
++ Revision: 170040
+- fix FHS patch (fix #37746)
+
+  + Olivier Blin <oblin@mandriva.com>
+    - restore BuildRoot
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - kill re-definition of %%buildroot on Pixel's request
+
+* Thu Nov 29 2007 Guillaume Rousse <guillomovitch@mandriva.org> 3.1.0-2mdv2008.1
++ Revision: 113947
+- don't provide or require private libfs
+
+* Thu Nov 29 2007 Guillaume Rousse <guillomovitch@mandriva.org> 3.1.0-1mdv2008.1
++ Revision: 113946
+- new version
+
+* Sun Aug 19 2007 Guillaume Rousse <guillomovitch@mandriva.org> 3.0.0-2mdv2008.0
++ Revision: 66810
+- set path for as much command as possible in default configuration (fix #32036)
+
+
+* Wed Feb 28 2007 Guillaume Rousse <guillomovitch@mandriva.org> 3.0.0-1mdv2007.0
++ Revision: 130153
+- sync sources
+- new version
+  rediff FHS patch
+  unify service script
+
+* Wed Feb 14 2007 Guillaume Rousse <guillomovitch@mandriva.org> 2.1.2.2-3mdv2007.1
++ Revision: 120838
+- LSB-compatible init script
+
+* Fri Dec 15 2006 Guillaume Rousse <guillomovitch@mandriva.org> 2.1.2.2-2mdv2007.1
++ Revision: 97306
+- move documentation under %%datadir/backuppc, as it is accessed at runtime (fix #27594)
+  no need to modify main cgi file name
+- Import backuppc
+
+* Wed Aug 02 2006 Guillaume Rousse <guillomovitch@mandriva.org> 2.1.2.2-1mdv2007.0
+- new version
+- new webapps macros
+- use herein document for README.mdv
+
+* Wed Dec 21 2005 Guillaume Rousse <guillomovitch@zarb.org> 2.1.2-1mdk
+- initial mdk package
 
