@@ -114,7 +114,7 @@ Alias /%{name} %{_var}/www/%{name}
 <Directory %{_var}/www/%{name}>
     Options ExecCGI
     DirectoryIndex BackupPC_Admin.cgi
-    Allow from all
+	Require all granted
 </Directory>
 EOF
 
