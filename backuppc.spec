@@ -10,7 +10,7 @@
 
 Name:               backuppc
 Version:            3.2.0
-Release:            3
+Release:            4
 Summary:            High-performance, enterprise-grade backup system
 Group:              Archiving/Backup
 License:            GPL
