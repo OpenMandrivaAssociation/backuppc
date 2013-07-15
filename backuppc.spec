@@ -17,6 +17,7 @@ License:            GPL
 url:                http://backuppc.sourceforge.net
 Source:             http://sourceforge.net/projects/backuppc/%{Name}-%{version}.tar.gz
 Source2:            %{name}.init
+Source3:            %{name}.rpmlintrc
 Patch0:             %{name}-3.1.0-fhs.patch
 Patch1: BackupPC-3.1.0-CVE-2009-3369.diff
 Requires:           sendmail-command
