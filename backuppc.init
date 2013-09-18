@@ -7,9 +7,10 @@
 # Provides: cfenvd
 # Required-Start: $network
 # Required-Stop: $network
-# Default-Start: 345
+# Default-Start: 3 4 5
 # Short-Description: Starts the BackupPC server
 # Description: This startup script launches the BackupPC server
+### END INIT INFO
 
 # Local variables
 NAME=backuppc

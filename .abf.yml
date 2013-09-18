@@ -1,2 +1,4 @@
+removed_sources:
+  BackupPC-3.2.0.tar.gz: f6ad9f1605d7816b03d787eb1c79090372232dd2
 sources:
-  "BackupPC-3.2.0.tar.gz": f6ad9f1605d7816b03d787eb1c79090372232dd2
+  BackupPC-3.2.1.tar.gz: 1468e0e38467a540342af8a5ea1d7793ca840943
