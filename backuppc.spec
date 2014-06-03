@@ -1,20 +1,18 @@
-%define name    backuppc
 %define Name    BackupPC
-%define version 3.2.1
-%define release %mkrel 11
 %define debug_package %{nil}
 
-%define _provides_exceptions perl(BackupPC::.*)
-%define _requires_exceptions perl(BackupPC::.*)
+%define __noautoreq 'perl\\(BackupPC::.*\\)'
+%define __noautoprov 'perl\\(BackupPC::.*\\)'
 
-Name:               %{name}
-Version:            %{version}
-Release:            %{release}
+Name:               backuppc
+Version:            3.2.1
+Release:            12
 Summary:            High-performance, enterprise-grade backup system
+
 Group:              Archiving/Backup
 License:            GPLv2
 Url:                http://backuppc.sourceforge.net
-Source0:            http://sourceforge.net/projects/backuppc/files/backuppc/%version/%{Name}-%{version}.tar.gz
+Source0:            http://sourceforge.net/projects/backuppc/files/backuppc/%{version}/%{Name}-%{version}.tar.gz
 Source3:	    BackupPC_Admin.c
 Source4:	    backuppc.service
 Source5:	    backuppc.tmpfiles
