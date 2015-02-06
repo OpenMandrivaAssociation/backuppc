@@ -6,7 +6,7 @@
 
 Name:               backuppc
 Version:            3.2.1
-Release:            12
+Release:            13
 Summary:            High-performance, enterprise-grade backup system
 
 Group:              Archiving/Backup
