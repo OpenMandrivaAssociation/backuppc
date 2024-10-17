@@ -11,7 +11,7 @@ Summary:            High-performance, enterprise-grade backup system
 
 Group:              Archiving/Backup
 License:            GPLv2
-Url:                http://backuppc.sourceforge.net
+Url:                https://backuppc.sourceforge.net
 Source0:            http://sourceforge.net/projects/backuppc/files/backuppc/%{version}/%{Name}-%{version}.tar.gz
 Source3:	    BackupPC_Admin.c
 Source4:	    backuppc.service
