@@ -31,6 +31,7 @@ Suggests:           openssh-clients
 Suggests:           samba-client
 Suggests:           perl(File::RsyncP)
 
+BuildRequires:	make
 %description
 BackupPC is a high-performance, enterprise-grade system
 for backing up Linux, Win32, and laptops to a server's disk.
